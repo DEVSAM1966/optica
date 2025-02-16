@@ -17,37 +17,37 @@ public class Patients {
     @Column(name = "id_patient", length = 5)
     private Long idPatient;
 
-    @Column(name = "name_patient", length = 70)
-    private String namePatient;
+    @Column(name = "name", length = 70)
+    private String name;
 
-    @Column(name = "dni_patient", length = 14, unique = true)
-    private String dniPatient;
+    @Column(name = "dni", length = 14, unique = true)
+    private String dni;
 
-    @Column(name = "adress_patient", length = 80)
-    private String adressPatient;
+    @Column(name = "adress", length = 80)
+    private String adress;
 
-    @Column(name = "locality_patient", length = 80)
-    String localityPatient;
+    @Column(name = "locality", length = 80)
+    String locality;
 
-    @Column(name = "province_patient", length = 40)
-    private String provincePatient;
+    @Column(name = "province", length = 40)
+    private String province;
 
-    @Column(name = "zip_code_patient", length = 11)
-    private String zipCodePatient;
+    @Column(name = "zip_code", length = 11)
+    private String zipCode;
 
-    @Column(name = "phone_patient", length = 16)
-    private String phonePatient;
+    @Column(name = "phone", length = 16)
+    private String phone;
 
-    @Column(name = "email_patient", length = 100)
-    private String emailPatient;
+    @Column(name = "email", length = 100)
+    private String email;
 
-    @Column(name = "profession_patient", length = 35)
-    private String professionPatient;
+    @Column(name = "profession", length = 35)
+    private String profession;
 
-    @Column(name = "discharge_date_patient", length = 10)
-    private String dischargeDatePatient;
+    @Column(name = "discharge_date", length = 10)
+    private String dischargeDate;
 
-    @Column(name = "notes_patient")
-    private String notesPatient;
+    @Column(name = "notes")
+    private String notes;
 
 }
