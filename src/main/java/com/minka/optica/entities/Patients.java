@@ -1,5 +1,6 @@
 package com.minka.optica.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Patients {
     @Column(name = "dni", length = 14, unique = true)
     private String dni;
 
-    @Column(name = "adress", length = 80)
+    @Column(name = "address", length = 80)
     private String adress;
 
     @Column(name = "locality", length = 80)
@@ -49,5 +50,9 @@ public class Patients {
 
     @Column(name = "notes")
     private String notes;
+
+    @OneToMany(mappedBy = "patients", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, orphanRemoval = false)
+    @JsonIgnore
+    private List<Optometries> optometriesList;
 
 }
