@@ -6,7 +6,7 @@ import com.minka.optica.entities.Optometries;
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface OptometriesMapper {
 
   Optometries asEntity(OptometriesDh optometriesDh);
