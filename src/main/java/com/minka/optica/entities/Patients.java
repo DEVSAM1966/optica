@@ -51,7 +51,7 @@ public class Patients {
     @Column(name = "notes")
     private String notes;
 
-    @OneToMany(mappedBy = "patients", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, orphanRemoval = false)
+    @OneToMany(mappedBy = "patients", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, orphanRemoval = false)
     @JsonIgnore
     private List<Optometries> optometriesList;
 
