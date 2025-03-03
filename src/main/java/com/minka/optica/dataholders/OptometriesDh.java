@@ -8,45 +8,45 @@ public class OptometriesDh {
 
   private Long idOptometry;
 
-  private String fecha;
+  private String dischargeDate;
 
   private String optometrist;
 
   private String symptons;
 
-  private String avOdSc;
+  private String vaReNc;
 
-  private int odEje;
+  private int reAxis;
 
-  private String odCilindro;
+  private String reCylinder;
 
-  private String odEsfera;
+  private String reSphere;
 
-  private String odAdd;
+  private String reAdd;
 
-  private String avOdCc;
+  private String vaReWc;
 
-  private String avOiSc;
+  private String vaLeSc;
 
-  private int oiEje;
+  private int leAxis;
 
-  private String oiCilindro;
+  private String leCylinder;
 
-  private String oiEsfera;
+  private String leSphere;
 
-  private String oiAdd;
+  private String leAdd;
 
-  private String avOiCc;
+  private String vaLeWc;
 
   private String dnp;
 
-  private String mainKeratometryOd;
+  private String mainKeratometryRe;
 
-  private String secondaryKeratometryOd;
+  private String secondaryKeratometryRe;
 
-  private String mainKeratometryOi;
+  private String mainKeratometryLe;
 
-  private String secondaryKeratometryOi;
+  private String secondaryKeratometryLe;
 
   private String externalExamination;
 

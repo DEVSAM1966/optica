@@ -3,6 +3,8 @@ package com.minka.optica.services.patients;
 import com.minka.optica.dataholders.PatientsDh;
 import com.minka.optica.dto.PatientsDto;
 import com.minka.optica.entities.Patients;
+import com.minka.optica.exceptions.BdNotFoundException;
+import com.minka.optica.exceptions.BdNotSaveException;
 import com.minka.optica.mapper.PatientsMapper;
 import com.minka.optica.repository.PatientsRepository;
 import java.util.Collections;
@@ -40,7 +42,7 @@ public class PatientsServiceImp implements PatientsService{
       final PatientsDto patientsDto = this.patientsMapper.asDto(patientsOptional.get());
       return patientsDto;
     } else {
-      throw new RuntimeException("GET - There are no patients in the database");
+      throw new BdNotFoundException("GET - There are no patients in the database");
     }
   }
 
@@ -62,7 +64,7 @@ public class PatientsServiceImp implements PatientsService{
     final Optional<Patients> existPatients = this.patientsRepository.findById(id);
 
     if (patientsDh.getIdPatient() != id) {
-      log.warn("PUT - Parameters are incorrect for field idPatient: " + patientsDh.getIdPatient() + " is different at is: " + id);
+        throw new BdNotSaveException("PUT - Parameters are incorrect for field idPatient: " + patientsDh.getIdPatient() + " is different at is: " + id);
     }
 
     if (existPatients.isPresent()) {
@@ -70,7 +72,7 @@ public class PatientsServiceImp implements PatientsService{
       final PatientsDto patientsDto = this.patientsMapper.asDto(patientsSaved);
       return patientsDto;
     } else {
-      throw new RuntimeException("PUT - There is no patients in the database with the id: " + id);
+      throw new BdNotFoundException("PUT - There is no patients in the database with the id: " + id);
     }
   }
 
@@ -81,7 +83,7 @@ public class PatientsServiceImp implements PatientsService{
       this.patientsRepository.deleteById(id);
       return true;
     } else {
-      throw new RuntimeException("DELETE - There is no patients in the database with the id: " + id);
+      throw new BdNotFoundException("DELETE - There is no patients in the database with the id: " + id);
     }
   }
 

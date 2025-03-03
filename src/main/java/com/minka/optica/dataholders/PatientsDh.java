@@ -13,7 +13,7 @@ public class PatientsDh {
 
   private String dni;
 
-  private String adress;
+  private String address;
 
   String locality;
 

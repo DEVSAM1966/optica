@@ -25,7 +25,7 @@ public class Patients {
     private String dni;
 
     @Column(name = "address", length = 80)
-    private String adress;
+    private String address;
 
     @Column(name = "locality", length = 80)
     String locality;

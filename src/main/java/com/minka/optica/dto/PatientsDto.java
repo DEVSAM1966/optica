@@ -13,9 +13,9 @@ public class PatientsDto {
 
   private String dni;
 
-  private String adress;
+  private String address;
 
-  String locality;
+  private String locality;
 
   private String province;
 

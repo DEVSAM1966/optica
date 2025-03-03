@@ -3,8 +3,17 @@ package com.minka.optica.services.optometries;
 import com.minka.optica.dataholders.OptometriesDh;
 import com.minka.optica.dto.OptometriesDto;
 import com.minka.optica.entities.Optometries;
+import com.minka.optica.exceptions.BdNotFoundException;
+import com.minka.optica.exceptions.BdNotSaveException;
+import com.minka.optica.exceptions.DischargeDateException;
 import com.minka.optica.mapper.OptometriesMapper;
 import com.minka.optica.repository.OptometriesRepository;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +50,7 @@ public class OptometriesServiceImp implements OptometriesService{
       final OptometriesDto optometriesDto = this.optometriesMapper.asDto(optometriesOptional.get());
       return optometriesDto;
     } else {
-      throw new RuntimeException("GET - There are no optometries in the database for the id: " + id);
+      throw new BdNotFoundException("GET - There are no optometries in the database for the id: " + id);
     }
   }
 
@@ -63,7 +72,7 @@ public class OptometriesServiceImp implements OptometriesService{
     final Optional<Optometries> existOptomeries = this.optometriesRepository.findById(id);
 
     if (optometriesDh.getIdOptometry() != id) {
-      log.warn("PUT - Parameters are incorrect for field idOptometry: " + optometriesDh.getIdOptometry() + " is different at is: " + id);
+      throw new BdNotSaveException("PUT - Parameters are incorrect for field idOptometry: " + optometriesDh.getIdOptometry() + " is different at is: " + id);
     }
 
     if (existOptomeries.isPresent()) {
@@ -71,7 +80,7 @@ public class OptometriesServiceImp implements OptometriesService{
       final OptometriesDto optometriesDto = this.optometriesMapper.asDto(optometriesSaved);
       return optometriesDto;
     } else {
-      throw new RuntimeException("PUT - There is no optometries in the database with the id: " + id);
+      throw new BdNotFoundException("PUT - There is no optometries in the database with the id: " + id);
     }
   }
 
@@ -79,10 +88,37 @@ public class OptometriesServiceImp implements OptometriesService{
   public Boolean deleteById(final Long id) {
     final Optional<Optometries> existOptometries = this.optometriesRepository.findById(id);
     if (existOptometries.isPresent()) {
-      this.optometriesRepository.deleteById(id);
-      return true;
+      Optometries optometry = existOptometries.get();
+
+      // Validar si dischargeDate es nulo o vacio
+      String dischargeDate = optometry.getDischargeDate();
+      if (dischargeDate == null || dischargeDate.trim().isEmpty()) {
+        throw new DischargeDateException("The field dischargeDate is null or empty for the optometry ID: " + id);
+      }
+
+      // Convertir String a LofechacalDate
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate fecha = LocalDate.parse(optometry.getDischargeDate(), formatter);
+
+      // Fecha actual
+      LocalDate fechaActual = LocalDate.now();
+
+      // Calcular la diferencia en días
+      long diferenciaDias = ChronoUnit.DAYS.between(fecha, fechaActual);
+
+      // Resultado
+      System.out.println("Delete of optometry. Difference in days: " + diferenciaDias);
+
+      // Calcular la diferencia
+      Period periodo = Period.between(fecha, fechaActual);
+
+      if (diferenciaDias > 1826) {
+        this.optometriesRepository.deleteById(id);
+        return true;
+      }
+      return false;
     } else {
-      throw new RuntimeException("DELETE - There is no optometries in the database with the id: " + id);
+      throw new BdNotFoundException("DELETE - There is no optometries in the database with the id: " + id);
     }
   }
 
