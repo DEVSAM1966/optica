@@ -16,52 +16,52 @@ public class Optometries {
     @Column(name = "id_optometry", length = 10)
     private Long idOptometry;
 
-    @Column(name = "discharge_date", length = 10)
+    @Column(name = "discharge_date", nullable = false, length = 10)
     private String dischargeDate;
 
-    @Column(name = "optometrist", length = 80)
+    @Column(name = "optometrist", nullable = false, length = 80)
     private String optometrist;
 
-    @Column(name = "symptons")
+    @Column(name = "symptons", nullable = false)
     private String symptons;
 
-    @Column(name = "va_re_nc", length = 5)
+    @Column(name = "va_re_nc", nullable = false, length = 5)
     private String vaReNc;
 
-    @Column(name = "re_axis")
+    @Column(name = "re_axis", nullable = false)
     private int reAxis;
 
-    @Column(name = "re_cylinder", length = 6)
+    @Column(name = "re_cylinder", nullable = false, length = 6)
     private String reCylinder;
 
-    @Column(name = "re_sphere", length = 6)
+    @Column(name = "re_sphere", nullable = false, length = 6)
     private String reSphere;
 
-    @Column(name = "re_add", length = 5)
+    @Column(name = "re_add", nullable = false, length = 5)
     private String reAdd;
 
-    @Column(name = "va_re_wc", length = 5)
+    @Column(name = "va_re_wc", nullable = false, length = 5)
     private String vaReWc;
 
-    @Column(name = "va_le_nc", length = 5)
-    private String vaLeSc;
+    @Column(name = "va_le_nc", nullable = false, length = 5)
+    private String vaLeNc;
 
-    @Column(name = "le_axis")
+    @Column(name = "le_axis", nullable = false)
     private int leAxis;
 
-    @Column(name = "le_cylinder", length = 6)
+    @Column(name = "le_cylinder", nullable = false, length = 6)
     private String leCylinder;
 
-    @Column(name = "le_sphere", length = 6)
+    @Column(name = "le_sphere", nullable = false, length = 6)
     private String leSphere;
 
-    @Column(name = "le_add", length = 5)
+    @Column(name = "le_add", nullable = false, length = 5)
     private String leAdd;
 
-    @Column(name = "va_le_wc", length = 5)
+    @Column(name = "va_le_wc", nullable = false, length = 5)
     private String vaLeWc;
 
-    @Column(name = "dnp", length = 11)
+    @Column(name = "dnp", nullable = false, length = 11)
     private String dnp;
 
     @Column(name = "main_keratometry_re", length = 14)

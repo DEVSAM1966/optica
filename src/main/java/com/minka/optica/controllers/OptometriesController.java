@@ -43,6 +43,16 @@ public class OptometriesController {
     return ResponseEntity.ok(this.optometriesService.findAll());
   }
 
+  @GetMapping(value = "/findbyoptometrist/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<OptometriesDto>> findByOptometrist(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.optometriesService.findByOptometrist(valor));
+  }
+
+  @GetMapping(value = "/findbydischargedate/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<OptometriesDto>> findByDischargeDate(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.optometriesService.findByDischargeDate(valor));
+  }
+
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OptometriesDto> updateById(@Validated @PathVariable final Long id, @Validated @RequestBody final OptometriesDh optometriesDh) {
     return ResponseEntity.ok(this.optometriesService.updateById(id, optometriesDh));

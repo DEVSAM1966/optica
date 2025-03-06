@@ -26,7 +26,7 @@ public class OptometriesDto {
 
   private String vaReWc;
 
-  private String vaLeSc;
+  private String vaLeNc;
 
   private int leAxis;
 

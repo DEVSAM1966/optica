@@ -7,6 +7,7 @@ import com.minka.optica.exceptions.BdNotFoundException;
 import com.minka.optica.exceptions.BdNotSaveException;
 import com.minka.optica.exceptions.DischargeDateException;
 import com.minka.optica.mapper.OptometriesMapper;
+import com.minka.optica.parser.Parser;
 import com.minka.optica.repository.OptometriesRepository;
 
 import java.time.LocalDate;
@@ -37,6 +38,8 @@ public class OptometriesServiceImp implements OptometriesService{
 
   @Override
   public OptometriesDto save(final OptometriesDh optometriesDh) {
+    Parser.Evaluator(optometriesDh, "POST");
+
     final Optometries optometries = this.optometriesMapper.asEntity(optometriesDh);
     final Optometries optometriesSaved = this.optometriesRepository.save(optometries);
     final OptometriesDto optometriesDto = this.optometriesMapper.asDto(optometriesSaved);
@@ -67,7 +70,33 @@ public class OptometriesServiceImp implements OptometriesService{
   }
 
   @Override
+  public List<OptometriesDto> findByOptometrist(final String valor) {
+    final List<Optometries> optometriesList =(List<Optometries>) this.optometriesRepository.findByOptometrist(valor);
+    if (CollectionUtils.isEmpty(optometriesList)) {
+      log.warn("FindByOptometrist - There are no optometries in the database");
+      return Collections.emptyList();
+    } else {
+      final List<OptometriesDto> optometriesDtoList = this.optometriesMapper.asDtoList(optometriesList);
+      return optometriesDtoList;
+    }
+  }
+
+  @Override
+  public List<OptometriesDto> findByDischargeDate(final String valor) {
+    final List<Optometries> optometriesList =(List<Optometries>) this.optometriesRepository.findByDischargeDate(valor);
+    if (CollectionUtils.isEmpty(optometriesList)) {
+      log.warn("FindByDischargeDate - There are no optometries in the database");
+      return Collections.emptyList();
+    } else {
+      final List<OptometriesDto> optometriesDtoList = this.optometriesMapper.asDtoList(optometriesList);
+      return optometriesDtoList;
+    }
+  }
+
+  @Override
   public OptometriesDto updateById(final Long id, final OptometriesDh optometriesDh) {
+    Parser.Evaluator(optometriesDh, "PUT");
+
     final Optometries optometries = this.optometriesMapper.asEntity(optometriesDh);
     final Optional<Optometries> existOptomeries = this.optometriesRepository.findById(id);
 

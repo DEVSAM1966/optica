@@ -7,6 +7,7 @@ import com.minka.optica.exceptions.BdNotFoundException;
 import com.minka.optica.exceptions.BdNotSaveException;
 import com.minka.optica.exceptions.DischargeDateException;
 import com.minka.optica.mapper.PatientsMapper;
+import com.minka.optica.parser.Parser;
 import com.minka.optica.repository.PatientsRepository;
 
 import java.time.LocalDate;
@@ -35,6 +36,8 @@ public class PatientsServiceImp implements PatientsService{
 
   @Override
   public PatientsDto save(final PatientsDh patientsDh) {
+    Parser.Evaluator(patientsDh, "POST");
+
     final Patients patients = this.patientsMapper.asEntity(patientsDh);
     final Patients patientsSaved = this.patientsRepository.save(patients);
     final PatientsDto patientsDto = this.patientsMapper.asDto(patientsSaved);
@@ -65,7 +68,70 @@ public class PatientsServiceImp implements PatientsService{
   }
 
   @Override
+  public List<PatientsDto> findByDni(final String valor) {
+    final List<Patients> patientsList = (List<Patients>) this.patientsRepository.findByDni(valor);
+    if (CollectionUtils.isEmpty(patientsList)) {
+      log.warn("FindByDni - There are no patients in the database");
+      return Collections.emptyList();
+    } else {
+      final List<PatientsDto> patientsDtoList = this.patientsMapper.asDtoList(patientsList);
+      return patientsDtoList;
+    }
+  }
+
+  @Override
+  public List<PatientsDto> findByName(final String valor) {
+    final List<Patients> patientsList = (List<Patients>) this.patientsRepository.findByName(valor);
+    if (CollectionUtils.isEmpty(patientsList)) {
+      log.warn("FindByName - There are no patients in the database");
+      return Collections.emptyList();
+    } else {
+      final List<PatientsDto> patientsDtoList = this.patientsMapper.asDtoList(patientsList);
+      return patientsDtoList;
+    }
+  }
+
+  @Override
+  public List<PatientsDto> findByPhone(final String valor) {
+    final List<Patients> patientsList = (List<Patients>) this.patientsRepository.findByPhone(valor);
+    if (CollectionUtils.isEmpty(patientsList)) {
+      log.warn("FindByPhone - There are no patients in the database");
+      return Collections.emptyList();
+    } else {
+      final List<PatientsDto> patientsDtoList = this.patientsMapper.asDtoList(patientsList);
+      return patientsDtoList;
+    }
+  }
+
+  @Override
+  public List<PatientsDto> findByEmail(final String valor) {
+    final List<Patients> patientsList = (List<Patients>) this.patientsRepository.findByEmail(valor);
+    if (CollectionUtils.isEmpty(patientsList)) {
+      log.warn("FindByEmail - There are no patients in the database");
+      return Collections.emptyList();
+    } else {
+      final List<PatientsDto> patientsDtoList = this.patientsMapper.asDtoList(patientsList);
+      return patientsDtoList;
+    }
+  }
+
+  @Override
+  public List<PatientsDto> findByDischargeDate(final String valor) {
+    final List<Patients> patientsList = (List<Patients>) this.patientsRepository.findByDischargeDate(valor);
+    if (CollectionUtils.isEmpty(patientsList)) {
+      log.warn("FindByDischargeDate - There are no patients in the database");
+      return Collections.emptyList();
+    } else {
+      final List<PatientsDto> patientsDtoList = this.patientsMapper.asDtoList(patientsList);
+      return patientsDtoList;
+    }
+  }
+
+  @Override
   public PatientsDto updateById(final Long id, final PatientsDh patientsDh) {
+
+    Parser.Evaluator(patientsDh, "PUT");
+
     final Patients patients = this.patientsMapper.asEntity(patientsDh);
     final Optional<Patients> existPatients = this.patientsRepository.findById(id);
 

@@ -12,6 +12,10 @@ public interface OptometriesService {
 
   List<OptometriesDto> findAll();
 
+  List<OptometriesDto> findByOptometrist(String valor);
+
+  List<OptometriesDto> findByDischargeDate(String valor);
+
   OptometriesDto updateById(Long id, OptometriesDh optometriesDh);
 
   Boolean deleteById(Long id);

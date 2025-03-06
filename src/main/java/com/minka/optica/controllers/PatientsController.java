@@ -43,6 +43,31 @@ public class PatientsController {
     return ResponseEntity.ok(this.patientsService.findAll());
   }
 
+  @GetMapping(value = "/findbydni/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PatientsDto>> findByDni(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.patientsService.findByDni(valor));
+  }
+
+  @GetMapping(value = "/findbyname/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PatientsDto>> findByName(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.patientsService.findByName(valor));
+  }
+
+  @GetMapping(value = "/findbyphone/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PatientsDto>> findByPhone(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.patientsService.findByPhone(valor));
+  }
+
+  @GetMapping(value = "/findbyemail/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PatientsDto>> findByEmail(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.patientsService.findByEmail(valor));
+  }
+
+  @GetMapping(value = "/findbydischargedate/{valor}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<PatientsDto>> findByDischargeDate(@Validated @PathVariable final String valor) {
+    return ResponseEntity.ok(this.patientsService.findByDischargeDate(valor));
+  }
+
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PatientsDto> updateById(@Validated @PathVariable final Long id, @Validated @RequestBody final PatientsDh patientsDh) {
     return ResponseEntity.ok(this.patientsService.updateById(id, patientsDh));
