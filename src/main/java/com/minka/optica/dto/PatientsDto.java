@@ -13,6 +13,8 @@ public class PatientsDto {
 
   private String dni;
 
+  private String tutor;
+
   private String address;
 
   private String locality;

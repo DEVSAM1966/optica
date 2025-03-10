@@ -9,13 +9,15 @@ import java.util.Objects;
 public class Parser {
 
     public static void Evaluator(PatientsDh patientsDh, String action) {
+        System.out.println("DENTRO DEL METODO PARSER...");
+
         if ((Objects.equals(patientsDh.getName(), null)) || (patientsDh.getName().isBlank()) || (patientsDh.getName().trim().isEmpty())) {
                 throw new BdNotSaveException(action + " - Parameters are incorrect for field name - is null, empty or blank.");
         }
 
-        if ((Objects.equals(patientsDh.getDni(), null)) || (patientsDh.getDni().isBlank()) || (patientsDh.getDni().trim().isEmpty())) {
+        /** if ((Objects.equals(patientsDh.getDni(), null)) || (patientsDh.getDni().isBlank()) || (patientsDh.getDni().trim().isEmpty())) {
             throw new BdNotSaveException(action + " - Parameters are incorrect for field DNI - is null, empty or blank.");
-        }
+        } */
 
         if ((Objects.equals(patientsDh.getAddress(), null)) || (patientsDh.getAddress().isBlank()) || (patientsDh.getAddress().trim().isEmpty())) {
             throw new BdNotSaveException(action + " - Parameters are incorrect for field address - is null, empty or blank.");
@@ -27,10 +29,6 @@ public class Parser {
 
         if ((Objects.equals(patientsDh.getProvince(), null)) || (patientsDh.getProvince().isBlank()) || (patientsDh.getProvince().trim().isEmpty())) {
             throw new BdNotSaveException(action + " - Parameters are incorrect for field province - is null. empty or blank.");
-        }
-
-        if ((Objects.equals(patientsDh.getLocality(), null)) || (patientsDh.getLocality().isBlank()) || (patientsDh.getLocality().trim().isEmpty())) {
-            throw new BdNotSaveException(action + " - Parameters are incorrect for field locality - is null, empty or blank.");
         }
 
         if ((Objects.equals(patientsDh.getZipCode(), null)) || (patientsDh.getZipCode().isBlank()) || (patientsDh.getZipCode().trim().isEmpty())) {

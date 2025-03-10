@@ -1,11 +1,11 @@
 package com.minka.optica.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+        import com.fasterxml.jackson.annotation.JsonIgnore;
+        import jakarta.persistence.*;
+        import lombok.Data;
+        import lombok.NoArgsConstructor;
 
-import java.util.List;
+        import java.util.List;
 
 @Entity
 @Data
@@ -21,8 +21,11 @@ public class Patients {
     @Column(name = "name", nullable = false, length = 70)
     private String name;
 
-    @Column(name = "dni", nullable = false, length = 14, unique = true)
+    @Column(name = "dni", length = 18)
     private String dni;
+
+    @Column(name = "tutor", nullable = true, length = 70)
+    private String tutor;
 
     @Column(name = "address", nullable = false, length = 80)
     private String address;

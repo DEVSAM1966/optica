@@ -13,9 +13,11 @@ public class PatientsDh {
 
   private String dni;
 
+  private String tutor;
+
   private String address;
 
-  String locality;
+  private String locality;
 
   private String province;
 

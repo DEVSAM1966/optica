@@ -68,14 +68,21 @@ public class PatientsController {
     return ResponseEntity.ok(this.patientsService.findByDischargeDate(valor));
   }
 
+
+  @PutMapping("/prueba")
+  public ResponseEntity<String> testUpdate(@Validated @RequestBody PatientsDh patientsDh) {
+    System.out.println("Recibido: " + patientsDh);
+    return ResponseEntity.ok("Recibido correctamente");
+  }
+
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PatientsDto> updateById(@Validated @PathVariable final Long id, @Validated @RequestBody final PatientsDh patientsDh) {
     return ResponseEntity.ok(this.patientsService.updateById(id, patientsDh));
   }
 
-
   @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Boolean> deleteById(@Validated @PathVariable final Long id) {
     return ResponseEntity.ok(this.patientsService.deleteById(id));
   }
+
 }
