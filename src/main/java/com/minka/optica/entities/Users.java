@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @Column(name = "username")
@@ -23,6 +23,6 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Set<Authorities> authorities = new HashSet<>();
 }

@@ -16,3 +16,12 @@ INSERT INTO optometries (discharge_date, optometrist, symptons, va_re_nc, re_axi
 
 INSERT INTO optometries (discharge_date, optometrist, symptons, va_re_nc, re_axis, re_cylinder, re_sphere, re_add, va_re_wc, va_le_nc, le_axis, le_cylinder, le_sphere, le_add, va_le_wc, dnp, main_keratometry_re, secondary_keratometry_re, main_keratometry_le, secondary_keratometry_le, external_examination, internal_examination, feedback, id_patient) VALUES ('2025-01-30', 'Dr. Sight', 'Dificultad para enfocar objetos cercanos', '20/25', 80, '-0.75', '-1.00', '+1.25', '20/20', '20/25', 85, '-0.75', '-1.00', '+1.25', '20/20', '33', '42.75 X 80', '44.25 X 175', '42.50 X 90', '44.00 X 0', 'Sin anomalías', 'Cristalino transparente', 'Revisión anual', 2);
 
+-- Inserta los usuarios en la tabla "users"
+INSERT INTO users (username, password, enabled) VALUES ('admin', '$2a$10$h/U3K9YOCfRCBJYscO0mMeJwvq9J0Tp9vKv5HlUqsr66VrXTov8Iy', 1);
+INSERT INTO users (username, password, enabled) VALUES ('user', '$2a$10$Qz4wXaMkQ/5zZYI9FbMcqOxKcX/W0H.6o9F7QhxFLmwt3VNPiBVem', 1);
+
+-- Inserta los roles en la tabla "authorities"
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
+
