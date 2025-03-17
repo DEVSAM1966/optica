@@ -1,0 +1,17 @@
+package com.minka.optica.entities.util;
+
+public enum RolePermission {
+    READ_ALL_PACIENTS,
+    READ_ONE_PACIENT,
+    CREATE_ONE_PACIENT,
+    UPDATE_ONE_PACIENT,
+    DELETE_ONE_PACIENT,
+
+    READ_ALL_OPTOMETRIES,
+    READ_ONE_OPTOMETRY,
+    CREATE_ONE_OPTOMETRY,
+    UPDATE_ONE_OPTOMETRY,
+    DELETE_ONE_OPTOMETRY,
+
+    READ_MY_PROFILE;
+}
