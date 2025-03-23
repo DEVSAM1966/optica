@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,8 +29,8 @@ public class HttpSecurityConfig {
                 .authenticationProvider(daoAuthProvider)
                 .authorizeHttpRequests( authReqConfig -> {
 
-                    authReqConfig.requestMatchers(HttpMethod.POST, "/customers").permitAll();
-                    authReqConfig.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
+                    authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/customers")).permitAll();
+                    authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/auth/**")).permitAll();
 
                     authReqConfig.anyRequest().authenticated();
                 })
