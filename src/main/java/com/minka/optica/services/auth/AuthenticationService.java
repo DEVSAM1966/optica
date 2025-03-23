@@ -7,6 +7,9 @@ import com.minka.optica.services.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthenticationService {
 
@@ -29,11 +32,20 @@ public class AuthenticationService {
         userDto.setRole(user.getRole().name());
 
         // Creamos el Token JWT.
-        String jwt = jwtService.generateToken(user);
+        String jwt = jwtService.generateToken(user, generateExtraClaims(user));
         userDto.setJwt(jwt);
 
         return userDto;
 
-
     }
+
+    private Map<String, Object> generateExtraClaims(User user) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("name",user.getName());
+        extraClaims.put("role",user.getRole().name());
+        extraClaims.put("authorities",user.getAuthorities());
+
+        return extraClaims;
+    }
+
 }
