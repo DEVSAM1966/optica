@@ -5,10 +5,13 @@ import com.minka.optica.entities.Role;
 import com.minka.optica.entities.User;
 import com.minka.optica.exceptions.InvalidPasswordException;
 import com.minka.optica.repository.UserRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -26,6 +29,7 @@ public class UserServiceImpl implements UserService{
         // Método para validar el password recibido.
         validatePassword(newUser);
 
+        System.out.println("Empezamos a crear el usuario en capa Services. ");
         User user = new User();
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
         user.setUsername(newUser.getUsername());
@@ -38,18 +42,26 @@ public class UserServiceImpl implements UserService{
 
     }
 
+    @Override
+    public Optional<User> findOneByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+
     // Realizamos una validación muy básica, pero puede variar según el negocio a implementar
     private void validatePassword(SaveUser dto) {
 
+        System.out.println("Entrando en la validación del Password. Que no sea null ambos.");
         // Verificamos que no sean null Password y RepeatedPassword.
         if(!StringUtils.hasText(dto.getPassword()) || !StringUtils.hasText(dto.getRepeatedPassword())) {
             throw new InvalidPasswordException("Passwords don't match");
-        }
+        } else {System.out.println("El password y su repetición no contienen null, vacio o todo espacio");}
 
+        System.out.println("Entrando en la validación del Password. Que ambos sean igual.");
         // Verificamos que Password y RepeatedPassword sean iguales.
         if(!dto.getPassword().equals(dto.getRepeatedPassword())) {
             throw new InvalidPasswordException("Passwords don't match");
-        }
+        } else {System.out.println("Son iguales password y su repetición.");}
     }
 
 

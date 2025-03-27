@@ -1,5 +1,6 @@
 package com.minka.optica.services.auth;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -38,7 +39,7 @@ public class JwtService {
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .signWith(generateKey(), SignatureAlgorithm.ES256)
+                .signWith(generateKey(), SignatureAlgorithm.HS256)
                 .compact();
 
         return jwt;
@@ -53,4 +54,18 @@ public class JwtService {
         return Keys.hmacShaKeyFor(passwordDecoded);
 
     }
+
+    public String extractUsername(String jwt) {
+        // Si el Token tiene algo invalido como formato, header, payload,
+        // firma, caduciada se genera un error y por tanto una excepción.
+        return extractAllClaims(jwt).getSubject();
+
+    }
+
+    private Claims extractAllClaims(String jwt) {
+        // Extraemos todas las Claims del Token.
+        return Jwts.parserBuilder().setSigningKey( generateKey()).build()
+            .parseClaimsJws(jwt).getBody();
+    }
+
 }
