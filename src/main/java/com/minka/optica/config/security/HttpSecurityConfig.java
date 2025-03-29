@@ -30,9 +30,9 @@ public class HttpSecurityConfig {
                 .authorizeHttpRequests( authReqConfig -> {
 
                     authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/customers")).permitAll();
-                    //authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/auth/**")).permitAll();
+                    authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/auth/**")).permitAll();
                     authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/auth/authenticate")).permitAll();
-                    authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/auth/valídate-token")).permitAll();
+                    authReqConfig.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/auth/validate-token")).permitAll();
 
                   authReqConfig.anyRequest().authenticated();
                 })

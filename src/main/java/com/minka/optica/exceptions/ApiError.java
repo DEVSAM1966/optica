@@ -1,6 +1,7 @@
 package com.minka.optica.exceptions;
 
 import java.time.LocalDate;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,4 +21,6 @@ public class ApiError {
 
   private LocalDate date;
 
+  // Campo opcional para manejar detalles adicionales (como errores de validación)
+  private Map<String, String> additionalDetails;
 }

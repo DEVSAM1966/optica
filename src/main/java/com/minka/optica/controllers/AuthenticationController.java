@@ -20,7 +20,7 @@ public class AuthenticationController {
   @Autowired
   private AuthenticationService authenticationService;
 
-  @GetMapping("valídate-token")
+  @GetMapping("validate-token")
   public ResponseEntity<Boolean> validate(@RequestParam String jwt) {
     boolean isTokenValid = authenticationService.validateToken(jwt);
     return ResponseEntity.ok(isTokenValid);

@@ -1,5 +1,6 @@
 package com.minka.optica.controllers;
 
+import com.minka.optica.dataholders.UsersDh;
 import com.minka.optica.services.auth.AuthenticationService;
 import com.minka.optica.dto.RegisteredUser;
 import com.minka.optica.dto.SaveUser;
@@ -20,7 +21,7 @@ public class CustomerController {
     private AuthenticationService authenticationService;
 
     @PostMapping
-    public ResponseEntity<RegisteredUser> registerOne(@RequestBody @Valid SaveUser newUser) {
+    public ResponseEntity<RegisteredUser> registerOne(@RequestBody @Valid UsersDh newUser) {
 
         RegisteredUser registeredUser = authenticationService.registerOneCustomer(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);

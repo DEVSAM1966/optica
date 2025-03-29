@@ -1,7 +1,7 @@
 package com.minka.optica.services.auth;
 
+import com.minka.optica.dataholders.UsersDh;
 import com.minka.optica.dto.RegisteredUser;
-import com.minka.optica.dto.SaveUser;
 import com.minka.optica.dto.auth.AuthenticationRequest;
 import com.minka.optica.dto.auth.AuthenticationResponse;
 import com.minka.optica.entities.User;
@@ -30,32 +30,21 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
 
-    public RegisteredUser registerOneCustomer(SaveUser newUser) {
+    public RegisteredUser registerOneCustomer(UsersDh newUser) {
 
         // Damos de alta al usuario en la BD.
-        System.out.println("1 - Vamos de alta al usuario (Hemos pasado por ello) ");
         User user = userService.registreOneCustomer(newUser);
-        System.out.println("1.0 - Damos de alta al usuario (Hemos pasado por ello) ");
 
         // Devolvemos los datos de alta en un DTO
-        System.out.println("2 - Vamos a rellenas los dtos. ");
         RegisteredUser userDto = new RegisteredUser();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setUsername(user.getUsername());
         userDto.setRole(user.getRole().name());
-        System.out.println("2.0 -  Rellenados los dtos. ");
-        System.out.println(userDto.getId());
-        System.out.println(userDto.getName());
-        System.out.println(userDto.getUsername());
-        System.out.println(userDto.getRole());
 
         // Creamos el Token JWT.
-        System.out.println("3 - Vamos a crear el JWT. ");
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
         userDto.setJwt(jwt);
-        System.out.println("3.0 - Salimos de crear el JWT.  ");
-        System.out.println(userDto.getJwt());
 
         return userDto;
 
